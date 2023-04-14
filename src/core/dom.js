@@ -20,9 +20,7 @@ class Dom {
 
             return this;
         }
-        if (this.$el.tagName.toLowerCase() === 'input') {
-            return this.$el.value.trim();
-        }
+        if (this.$el.tagName.toLowerCase() === 'input') return this.$el.value.trim();
         return this.$el.textContent.trim();
     }
 
@@ -40,14 +38,9 @@ class Dom {
     }
 
     append(node) {
-        if (node instanceof Dom) {
-            node = node.$el;
-        }
-        if (Element.prototype.append) {
-            this.$el.append(node);
-        } else {
-            this.$el.appendChild(node);
-        }
+        if (node instanceof Dom) node = node.$el;
+        if (Element.prototype.append) this.$el.append(node);
+        else this.$el.appendChild(node);
 
         return this;
     }
@@ -124,8 +117,6 @@ export function $(selector) {
 
 $.create = (tagName, classes = '') => {
     const el = document.createElement(tagName);
-    if (classes) {
-        el.classList.add(classes);
-    }
+    if (classes) el.classList.add(classes);
     return $(el);
 };
